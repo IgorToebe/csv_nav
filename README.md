@@ -33,9 +33,15 @@ O **csv-nav** é uma ferramenta de chat conversacional que utiliza o poder da AP
 
 ### 🚀 Começando
 
-Siga as instruções abaixo para executar o projeto em seu ambiente local.
+* Você pode experimentar as funcionalidades desse software diretamente em: [CSV_NAV_WEB](https://csvnav-dvjmgnhdbkphhishggyi6q.streamlit.app/)
+* Ou então siga as instruções abaixo para executar o projeto em seu ambiente local.
 
-#### Pré-requisitos
+
+### 🚀 Instalação local com Docker e VS Code (via Remote Containers)
+
+Este é o método **recomendado** para executar a aplicação `csv-nav`, garantindo um ambiente isolado, reprodutível e com dependências corretamente configuradas.
+
+#### ✅ Pré-requisitos
 
 Antes de começar, garanta que você tenha os seguintes softwares instalados:
 
@@ -44,30 +50,79 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [Extensão Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) para o VS Code.
 
-#### Instalação e Execução
+Além disso, deverá obter uma chave de API do Google Gemini que é solicitada durante a execução da aplicação.
+* Você pode obter uma chave de API do Google Gemini em [Google AI Studio](https://aistudio.google.com/app/apikey).
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone [https://github.com/Marconiadsf/csv_nav.git](https://github.com/Marconiadsf/csv_nav.git)
-    cd csv-nav
-    ```
+#### ⚙️ Passo a Passo de Instalação
 
-2.  **Obtenha sua Chave de API do Google Gemini:**
-   
-    * Você pode obter sua chave da API do Google Gemini, no [Google AI Studio](https://aistudio.google.com/app/apikey).
-    * Basta adicionar sua API ao acessar a página inicial da aplicação.
+##### 1. Clone o repositório
 
-3.  **Abra no Dev Container:**
-    * Abra a pasta do projeto no **Visual Studio Code**.
-    * O VS Code detectará automaticamente a configuração (`.devcontainer/devcontainer.json`) e exibirá uma notificação no canto inferior direito. Clique em **"Reopen in Container"**.
-    * Aguarde o Docker construir a imagem e iniciar o container. Este processo instalará todas as dependências do Python automaticamente.
+Abra um terminal (cmd, PowerShell ou Git Bash) e execute:
 
-4.  **Inicie a Aplicação:**
-    * Com o projeto aberto no container, abra um novo terminal no VS Code (`Ctrl+'` ou `Terminal > New Terminal`).
-    * Execute o seguinte comando para iniciar a aplicação Streamlit:
-    ```bash
-    streamlit run app.py
-    ```
+```bash
+git clone https://github.com/Marconiadsf/csv_nav.git
+cd csv_nav
+```
+
+##### 2. Crie e acesse a pasta no Docker
+
+Crie um container com a imagem oficial do Python, mapeando o diretório clonado:
+
+```bash
+docker run -it -v C:/Users/<SeuUsuario>/csv_nav:/app -p 8501:8501 python:latest bash
+```
+
+> 🧠 Substitua `<SeuUsuario>` pelo nome da sua conta de usuário no Windows.
+
+##### 3. Conecte o VS Code ao container
+
+1. Abra o **Visual Studio Code**.
+2. Pressione `Ctrl+Shift+P` para abrir a paleta de comandos.
+3. Digite `Remote: Show Remote Menu` e selecione a opção.
+4. Localize o container recém-criado e clique em **"Attach in a New Window"**.
+5. Crie o workspace apontando para a pasta `/app`.
+
+##### 4. Instalação de Dependências 📦
+
+No terminal dentro do VS Code (já conectado ao container), execute:
+
+```bash
+pip install -r requirements.txt
+```
+
+> 📁 Certifique-se de estar no diretório `/app` onde o arquivo `requirements.txt` está localizado.
+
+#### 🚀 Execução da Aplicação
+
+Para iniciar a aplicação, execute no terminal:
+
+```bash
+streamlit run app.py
+```
+
+Após a execução, o Streamlit exibirá um endereço local como:
+
+```
+http://0.0.0.0:8501
+```
+
+##### Acessando no Navegador
+
+- Você pode abrir a aplicação diretamente acessando:
+  - `http://localhost:8501`
+  - ou, se necessário, substituir `0.0.0.0` pelo IP da sua máquina, por exemplo: `http://192.168.0.1:8501`
+- Para descobrir seu IP local, utilize o comando `ipconfig` no terminal (Windows).
+
+---
+
+### ✅ Pronto!
+
+A aplicação `csv-nav` estará disponível via navegador para você:
+
+- Enviar arquivos `.csv` ou `.zip` com suas Notas Fiscais.
+- Fazer perguntas em **linguagem natural** sobre os dados enviados.
+- Obter insights fiscais diretamente com suporte da IA Gemini + LangChain.
+
 
 #### Como Usar
 
@@ -90,80 +145,3 @@ A aplicação foi projetada para ser simples e intuitiva. Siga os passos abaixo 
 
 ---
 
-## 🇬🇧 English
-
-### Overview
-
-**csv-nav** is a conversational chat tool that leverages the power of Google's Gemini API and the efficiency of an SQLite database to analyze CSV files from Brazilian Electronic Invoices (NFe). Ask questions in natural language and get valuable insights from your fiscal data.
-
-### ✨ Features
-
-* **Interactive Chat:** Talk to your NFe data as if you were speaking to an analyst.
-* **Intelligent Analysis:** Extract information like totals, best-selling products, top customers/suppliers, and more.
-* **Multi-File Support:** Upload `.csv` files or a single `.zip` file containing all your CSVs.
-* **Simple Interface:** User-friendly web UI built with Streamlit for easy uploads and visualization.
-* **Simplified Setup:** Quick and isolated execution using Docker and VS Code Dev Containers.
-
-### 🛠️ Tech Stack
-
-* **Language:** Python
-* **Generative AI:** Google Gemini
-* **AI Frameworks:** LangChain, LangChain Google GenAI
-* **Web Interface:** Streamlit
-* **Data Manipulation:** Pandas
-* **Database:** SQLite
-
-### 🚀 Getting Started
-
-Follow the instructions below to run the project in your local environment.
-
-#### Prerequisites
-
-Before you begin, ensure you have the following software installed:
-
-* [Git](https://git-scm.com/)
-* [Docker](https://www.docker.com/products/docker-desktop/)
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) for VS Code.
-
-#### Installation & Running
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/Marconiadsf/csv_nav.git](https://github.com/Marconiadsf/csv_nav.git)
-    cd csv-nav
-    ```
-
-2.  **Set up your API Key:**
-** TO DO **
-
-3.  **Open in Dev Container:**
-    * Open the project folder in **Visual Studio Code**.
-    * VS Code will automatically detect the configuration (`.devcontainer/devcontainer.json`) and show a notification in the bottom-right corner. Click on **"Reopen in Container"**.
-    * Wait for Docker to build the image and start the container. This process will automatically install all Python dependencies.
-
-4.  **Start the Application:**
-    * With the project open inside the container, open a new terminal in VS Code (`Ctrl+'` or `Terminal > New Terminal`).
-    * Run the following command to start the Streamlit application:
-    ```bash
-    streamlit run app.py
-    ```
-
-#### How to Use
-
-The application is designed to be simple and intuitive. Follow the steps below after launching it:
-
-1.  **Upload Your Files:** In the application's UI, use the file selector to upload your NFe data. **You can upload multiple `.csv` files or a single `.zip` file containing the CSVs.**
-2.  **Wait for Processing:** The tool will read, process, and index the data from your files into a temporary database for analysis.
-3.  **Ask Your Questions:** Use the main chat box to ask **questions in natural language about the information contained in the files** you uploaded.
-
-**Example Questions:**
-* *"What was the total value of all invoices in the period?"*
-* *"List the top 5 best-selling products."*
-* *"Who were the main customers and what were their respective purchase totals?"*
-* *"Show me the invoices issued in the month of May."*
-
-### 🔧 Troubleshooting
-
-* **WSL Error on Windows:** If Docker shows an error related to WSL (Windows Subsystem for Linux), you may need to update your WSL version. Open PowerShell or CMD as an administrator and run `wsl --update`, then reboot your computer.
-* **Container Issues:** If the Dev Container fails to start correctly, you can try cleaning up old containers. Open Docker Desktop, go to the "Containers" section, find the container associated with this project, and remove it. Then, try reopening it in VS Code.
