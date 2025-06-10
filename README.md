@@ -52,12 +52,10 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
     cd csv-nav
     ```
 
-2.  **Configure sua Chave de API:**
-    * Crie um arquivo chamado `.env` na raiz do projeto.
-    * Dentro deste arquivo, adicione sua chave da API do Google Gemini, que você pode obter no [Google AI Studio](https://aistudio.google.com/app/apikey).
-    ```
-    GOOGLE_API_KEY="SUA_CHAVE_DE_API_AQUI"
-    ```
+2.  **Obtenha sua Chave de API do Google Gemini:**
+   
+    * Você pode obter sua chave da API do Google Gemini, no [Google AI Studio](https://aistudio.google.com/app/apikey).
+    * Basta adicionar sua API ao acessar a página inicial da aplicação.
 
 3.  **Abra no Dev Container:**
     * Abra a pasta do projeto no **Visual Studio Code**.
@@ -137,11 +135,7 @@ Before you begin, ensure you have the following software installed:
     ```
 
 2.  **Set up your API Key:**
-    * Create a file named `.env` in the project's root directory.
-    * Inside this file, add your Google Gemini API key, which you can obtain from [Google AI Studio](https://aistudio.google.com/app/apikey).
-    ```
-    GOOGLE_API_KEY="YOUR_API_KEY_HERE"
-    ```
+** TO DO **
 
 3.  **Open in Dev Container:**
     * Open the project folder in **Visual Studio Code**.
